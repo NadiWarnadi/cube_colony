@@ -1,0 +1,15 @@
+[package]
+name = "game_engine"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+# Dependensi wajib untuk menghubungkan Rust dengan Flutter
+flutter_rust_bridge = "=2.0.0" # Sesuaikan dengan versi FRB CLI yang kamu install nanti
+
+# Dependensi pendukung game (opsional tapi sangat berguna kedepannya)
+rand = "0.8"       # Untuk posisi pohon atau musuh acak
+lazy_static = "1.4" # Untuk menyimpan global state game di Rust
