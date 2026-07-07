@@ -8,7 +8,7 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 # Dependensi wajib untuk menghubungkan Rust dengan Flutter
-flutter_rust_bridge = "=2.0.0" # Sesuaikan dengan versi FRB CLI yang kamu install nanti
+flutter_rust_bridge = "=2.12.0" # Sesuaikan dengan versi FRB CLI yang kamu install nanti
 
 # Dependensi pendukung game (opsional tapi sangat berguna kedepannya)
 rand = "0.8"       # Untuk posisi pohon atau musuh acak

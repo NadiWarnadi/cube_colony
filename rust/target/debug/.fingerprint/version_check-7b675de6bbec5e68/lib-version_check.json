@@ -1,0 +1,1 @@
+{"rustc":7232790203559492684,"features":"[]","declared_features":"[]","target":18099224280402537651,"profile":2225463790103693989,"path":7851287369751280554,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\version_check-7b675de6bbec5e68\\dep-lib-version_check","checksum":false}}],"rustflags":["--cfg","frb_expand"],"config":8247474407144887393,"compile_kind":0}
