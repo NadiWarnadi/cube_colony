@@ -1,0 +1,50 @@
+name: Flutter Rust Bridge Codegen
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  generate-and-commit:
+    runs-on: ubuntu-latest
+
+    # Memberikan izin penuh kepada token GitHub Actions untuk menulis kode ke repositori
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Cache Cargo Dependencies
+        uses: swatinem/rust-cache@v2
+
+      - name: Install LLVM (Required for FRB)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y llvm-15 libclang-15-dev
+
+      - name: Install FRB Codegen & Cargo Expand
+        run: |
+          cargo install flutter_rust_bridge_codegen --version 2.12.0
+          cargo install cargo-expand
+
+      - name: Run Codegen
+        run: flutter_rust_bridge_codegen generate
+
+      - name: Commit and Push Generated Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-generate flutter rust bridge files [skip ci]"
+          file_pattern: 'lib/src/rust/* rust/src/frb_generated.rs'
+          commit_user_name: "NadiWarnadi" 
+          commit_user_email: "warnadi2006@gmail.com"

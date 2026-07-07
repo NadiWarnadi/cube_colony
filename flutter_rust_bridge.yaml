@@ -1,0 +1,12 @@
+# ==================================================================
+# Konfigurasi Baru flutter_rust_bridge V2 untuk Proyek Cube Colony
+# ==================================================================
+
+# 1. Lokasi folder root projek Rust Anda
+rust_root: "rust/"
+
+# 2. Namespace modul utama Rust (bukan lagi path file fisik)
+rust_input: "crate::api"
+
+# 3. Lokasi folder tempat menampung kode Dart hasil generate
+dart_output: "lib/src/rust/"
