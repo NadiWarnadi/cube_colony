@@ -12,7 +12,7 @@ pub struct WorkerDto {
 pub fn update_game_state(delta_time: f32, current_workers: Vec<WorkerDto>) -> Vec<WorkerDto> {
     // Di langkah berikutnya, ini akan membaca dari static GameState kita.
     // Sementara kita buat simulasi pergerakan langsung di sini agar Flutter bisa ngetes bridge-nya.
-    current_workers.into_iter().map(|mut w| {
+    current_workers.into_iter().map(|w| {
         let mut x = w.x + 20.0 * delta_time; // Bergerak ke kanan perlahan
         if x > 400.0 { x = 10.0; } // Reset kalau mentok
         WorkerDto { x, y: w.y, color_hex: w.color_hex }

@@ -58,3 +58,26 @@ cube_colony/
 ```
 
 ---
+
+
+## 📦 Panduan Pengembangan
+
+### 1. Prasyarat
+- Flutter SDK & Rust Toolchain
+- `cargo install flutter_rust_bridge_codegen` [1.3]
+
+### 2. Generator Kode
+Jalankan perintah ini setiap kali mengubah kode `rust/src/` [1.3]:
+```bash
+flutter_rust_bridge_codegen generate
+```
+
+### 3. Menjalankan
+```bash
+flutter run
+```
+
+---
+
+### Catatan: Inisialisasi `main.dart`
+Pastikan `lib/main.dart` memanggil `await RustLib.init();` sebelum `runApp()` untuk menginisialisasi jembatan Rust [1.3].
