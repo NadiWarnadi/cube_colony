@@ -1,14 +1,17 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' as dart_colors;
-// Import hasil generate jembatan Rust kamu (sesuaikan nama package jika berbeda)
-import 'package:cube_colony/src/rust/api.rs' as rust_api; 
+// Import hasil generate jembatan Rust kamu 
+import 'package:cube_colony/src/rust/frb_generated.dart';
+
+// FRB v2 otomatis membuat pemetaan struktur Rust ke Dart di sub-berkas ini:
+import 'package:cube_colony/src/rust/api/api.dart'; 
 
 class CubeColonyGame extends FlameGame {
-  // Kita simpan data warga lokal di Flutter yang datanya selalu diperbarui dari Rust
-  List<rust_api.WorkerDto> workers = [
-    rust_api.WorkerDto(x: 50, y: 50, colorHex: 0xFFFFD54F),
-    rust_api.WorkerDto(x: 100, y: 80, colorHex: 0xFFFFD54F),
+  //  PERBAIKAN: Hapus prefix 'rust_api.', panggil WorkerDto langsung
+  List<WorkerDto> workers = [
+    WorkerDto(x: 50, y: 50, colorHex: 0xFFFFD54F),
+    WorkerDto(x: 100, y: 80, colorHex: 0xFFFFD54F),
   ];
 
   @override
@@ -16,8 +19,15 @@ class CubeColonyGame extends FlameGame {
     super.update(dt);
     
     // TIAP DETIK, MINTA RUST UNTUK MENGHITUNG PERGERAKAN BARU
-    // Fungsi 'updateGameState' ini berasal dari file rust/src/api.rs kita kemarin
-    workers = rust_api.updateGameState(deltaTime: dt, currentWorkers: workers);
+    //  PERBAIKAN: Hapus 'rust_api.', panggil fungsi updateGameState langsung.
+    // Jika fungsi di Rust mengembalikan Future (async), tambahkan keyword 'await' dan ubah method update menjadi async.
+    _fetchNextState(dt);
+  }
+
+  // Helper method untuk memproses update state dari Rust
+  void _fetchNextState(double dt) async {
+    // Nama fungsi dari Rust otomatis berubah menjadi camelCase di Dart (updateGameState)
+    workers = await updateGameState(deltaTime: dt, currentWorkers: workers);
   }
 
   @override

@@ -45,6 +45,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-generate flutter rust bridge files [skip ci]"
-          file_pattern: 'lib/src/rust/* rust/src/frb_generated.rs'
           commit_user_name: "NadiWarnadi" 
           commit_user_email: "warnadi2006@gmail.com"
