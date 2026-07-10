@@ -6,6 +6,14 @@
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
+Future<List<TileDto>> generateInitialMap({
+  required int width,
+  required int height,
+}) => RustLib.instance.api.crateApiGenerateInitialMap(
+  width: width,
+  height: height,
+);
+
 Future<List<WorkerDto>> updateGameState({
   required double deltaTime,
   required List<WorkerDto> currentWorkers,
@@ -14,15 +22,31 @@ Future<List<WorkerDto>> updateGameState({
   currentWorkers: currentWorkers,
 );
 
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TileDto>>
+abstract class TileDto implements RustOpaqueInterface {}
+
 class WorkerDto {
   final double x;
   final double y;
   final int colorHex;
+  final int tileTypeId;
+  final int resourceAmount;
 
-  const WorkerDto({required this.x, required this.y, required this.colorHex});
+  const WorkerDto({
+    required this.x,
+    required this.y,
+    required this.colorHex,
+    required this.tileTypeId,
+    required this.resourceAmount,
+  });
 
   @override
-  int get hashCode => x.hashCode ^ y.hashCode ^ colorHex.hashCode;
+  int get hashCode =>
+      x.hashCode ^
+      y.hashCode ^
+      colorHex.hashCode ^
+      tileTypeId.hashCode ^
+      resourceAmount.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -31,5 +55,7 @@ class WorkerDto {
           runtimeType == other.runtimeType &&
           x == other.x &&
           y == other.y &&
-          colorHex == other.colorHex;
+          colorHex == other.colorHex &&
+          tileTypeId == other.tileTypeId &&
+          resourceAmount == other.resourceAmount;
 }
