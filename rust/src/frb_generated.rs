@@ -39,7 +39,11 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
+<<<<<<< HEAD
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1046014313;
+=======
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1954389740;
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
 // Section: executor
 
@@ -47,7 +51,11 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 // Section: wire_funcs
 
+<<<<<<< HEAD
 fn wire__crate__api__generate_initial_map_impl(
+=======
+fn wire__crate__api__create_worker_sample_impl(
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -55,7 +63,11 @@ fn wire__crate__api__generate_initial_map_impl(
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
+<<<<<<< HEAD
             debug_name: "generate_initial_map",
+=======
+            debug_name: "create_worker_sample",
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
@@ -69,6 +81,7 @@ fn wire__crate__api__generate_initial_map_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+<<<<<<< HEAD
             let api_width = <i32>::sse_decode(&mut deserializer);
             let api_height = <i32>::sse_decode(&mut deserializer);
             deserializer.end();
@@ -77,6 +90,44 @@ fn wire__crate__api__generate_initial_map_impl(
                     let output_ok = Result::<_, ()>::Ok(crate::api::generate_initial_map(
                         api_width, api_height,
                     ))?;
+=======
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(crate::api::create_worker_sample())?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__get_initial_worker_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "get_initial_worker",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(crate::api::get_initial_worker())?;
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
                     Ok(output_ok)
                 })())
             }
@@ -105,7 +156,7 @@ fn wire__crate__api__update_game_state_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_delta_time = <f32>::sse_decode(&mut deserializer);
+            let api_delta_time = <f64>::sse_decode(&mut deserializer);
             let api_current_workers = <Vec<crate::api::WorkerDto>>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
@@ -129,6 +180,7 @@ flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
 
 // Section: dart2rust
 
+<<<<<<< HEAD
 impl SseDecode for TileDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -148,9 +200,39 @@ impl SseDecode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpa
 }
 
 impl SseDecode for f32 {
+=======
+impl SseDecode for String {
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_f32::<NativeEndian>().unwrap()
+        let mut inner = <Vec<u8>>::sse_decode(deserializer);
+        return String::from_utf8(inner).unwrap();
+    }
+}
+
+impl SseDecode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_f64::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for Vec<u8> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<u8>::sse_decode(deserializer));
+        }
+        return ans_;
     }
 }
 
@@ -185,10 +267,10 @@ impl SseDecode for Vec<crate::api::WorkerDto> {
     }
 }
 
-impl SseDecode for u32 {
+impl SseDecode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u32::<NativeEndian>().unwrap()
+        deserializer.cursor.read_u8().unwrap()
     }
 }
 
@@ -207,12 +289,26 @@ impl SseDecode for usize {
 impl SseDecode for crate::api::WorkerDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+<<<<<<< HEAD
         let mut var_x = <f32>::sse_decode(deserializer);
         let mut var_y = <f32>::sse_decode(deserializer);
         let mut var_colorHex = <u32>::sse_decode(deserializer);
         let mut var_tileTypeId = <i32>::sse_decode(deserializer);
         let mut var_resourceAmount = <u32>::sse_decode(deserializer);
+=======
+        let mut var_id = <i32>::sse_decode(deserializer);
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_tileTypeId = <i32>::sse_decode(deserializer);
+        let mut var_resourceAmount = <i32>::sse_decode(deserializer);
+        let mut var_x = <f64>::sse_decode(deserializer);
+        let mut var_y = <f64>::sse_decode(deserializer);
+        let mut var_colorHex = <String>::sse_decode(deserializer);
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
         return crate::api::WorkerDto {
+            id: var_id,
+            name: var_name,
+            tile_type_id: var_tileTypeId,
+            resource_amount: var_resourceAmount,
             x: var_x,
             y: var_y,
             color_hex: var_colorHex,
@@ -238,8 +334,14 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
+<<<<<<< HEAD
         1 => wire__crate__api__generate_initial_map_impl(port, ptr, rust_vec_len, data_len),
         2 => wire__crate__api__update_game_state_impl(port, ptr, rust_vec_len, data_len),
+=======
+        1 => wire__crate__api__create_worker_sample_impl(port, ptr, rust_vec_len, data_len),
+        2 => wire__crate__api__get_initial_worker_impl(port, ptr, rust_vec_len, data_len),
+        3 => wire__crate__api__update_game_state_impl(port, ptr, rust_vec_len, data_len),
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
         _ => unreachable!(),
     }
 }
@@ -277,6 +379,10 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<TileDto>> for TileDto {
 impl flutter_rust_bridge::IntoDart for crate::api::WorkerDto {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
+            self.id.into_into_dart().into_dart(),
+            self.name.into_into_dart().into_dart(),
+            self.tile_type_id.into_into_dart().into_dart(),
+            self.resource_amount.into_into_dart().into_dart(),
             self.x.into_into_dart().into_dart(),
             self.y.into_into_dart().into_dart(),
             self.color_hex.into_into_dart().into_dart(),
@@ -293,6 +399,7 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::WorkerDto> for crate::api::Wo
     }
 }
 
+<<<<<<< HEAD
 impl SseEncode for TileDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -310,9 +417,36 @@ impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpa
 }
 
 impl SseEncode for f32 {
+=======
+impl SseEncode for String {
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_f32::<NativeEndian>(self).unwrap();
+        <Vec<u8>>::sse_encode(self.into_bytes(), serializer);
+    }
+}
+
+impl SseEncode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_f64::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for Vec<u8> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <u8>::sse_encode(item, serializer);
+        }
     }
 }
 
@@ -343,10 +477,10 @@ impl SseEncode for Vec<crate::api::WorkerDto> {
     }
 }
 
-impl SseEncode for u32 {
+impl SseEncode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u32::<NativeEndian>(self).unwrap();
+        serializer.cursor.write_u8(self).unwrap();
     }
 }
 
@@ -368,11 +502,21 @@ impl SseEncode for usize {
 impl SseEncode for crate::api::WorkerDto {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+<<<<<<< HEAD
         <f32>::sse_encode(self.x, serializer);
         <f32>::sse_encode(self.y, serializer);
         <u32>::sse_encode(self.color_hex, serializer);
         <i32>::sse_encode(self.tile_type_id, serializer);
         <u32>::sse_encode(self.resource_amount, serializer);
+=======
+        <i32>::sse_encode(self.id, serializer);
+        <String>::sse_encode(self.name, serializer);
+        <i32>::sse_encode(self.tile_type_id, serializer);
+        <i32>::sse_encode(self.resource_amount, serializer);
+        <f64>::sse_encode(self.x, serializer);
+        <f64>::sse_encode(self.y, serializer);
+        <String>::sse_encode(self.color_hex, serializer);
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     }
 }
 

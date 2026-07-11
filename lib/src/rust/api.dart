@@ -6,6 +6,7 @@
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
+<<<<<<< HEAD
 Future<List<TileDto>> generateInitialMap({
   required int width,
   required int height,
@@ -13,6 +14,16 @@ Future<List<TileDto>> generateInitialMap({
   width: width,
   height: height,
 );
+=======
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `TileDto`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `fmt`, `fmt`
+
+Future<WorkerDto> createWorkerSample() =>
+    RustLib.instance.api.crateApiCreateWorkerSample();
+
+Future<WorkerDto> getInitialWorker() =>
+    RustLib.instance.api.crateApiGetInitialWorker();
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
 Future<List<WorkerDto>> updateGameState({
   required double deltaTime,
@@ -26,8 +37,13 @@ Future<List<WorkerDto>> updateGameState({
 abstract class TileDto implements RustOpaqueInterface {}
 
 class WorkerDto {
+  final int id;
+  final String name;
+  final int tileTypeId;
+  final int resourceAmount;
   final double x;
   final double y;
+<<<<<<< HEAD
   final int colorHex;
   final int tileTypeId;
   final int resourceAmount;
@@ -38,21 +54,47 @@ class WorkerDto {
     required this.colorHex,
     required this.tileTypeId,
     required this.resourceAmount,
+=======
+  final String colorHex;
+
+  const WorkerDto({
+    required this.id,
+    required this.name,
+    required this.tileTypeId,
+    required this.resourceAmount,
+    required this.x,
+    required this.y,
+    required this.colorHex,
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
   });
 
   @override
   int get hashCode =>
+<<<<<<< HEAD
       x.hashCode ^
       y.hashCode ^
       colorHex.hashCode ^
       tileTypeId.hashCode ^
       resourceAmount.hashCode;
+=======
+      id.hashCode ^
+      name.hashCode ^
+      tileTypeId.hashCode ^
+      resourceAmount.hashCode ^
+      x.hashCode ^
+      y.hashCode ^
+      colorHex.hashCode;
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is WorkerDto &&
           runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          tileTypeId == other.tileTypeId &&
+          resourceAmount == other.resourceAmount &&
           x == other.x &&
           y == other.y &&
           colorHex == other.colorHex &&

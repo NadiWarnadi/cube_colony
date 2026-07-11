@@ -35,7 +35,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  double dco_decode_f_32(dynamic raw);
+  String dco_decode_String(dynamic raw);
+
+  @protected
+  double dco_decode_f_64(dynamic raw);
+
+  @protected
+  int dco_decode_i_32(dynamic raw);
+
+  @protected
+  Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
   int dco_decode_i_32(dynamic raw);
@@ -50,7 +59,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<WorkerDto> dco_decode_list_worker_dto(dynamic raw);
 
   @protected
-  int dco_decode_u_32(dynamic raw);
+  int dco_decode_u_8(dynamic raw);
 
   @protected
   void dco_decode_unit(dynamic raw);
@@ -62,6 +71,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   WorkerDto dco_decode_worker_dto(dynamic raw);
 
   @protected
+<<<<<<< HEAD
   TileDto
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTileDto(
     SseDeserializer deserializer,
@@ -75,6 +85,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   double sse_decode_f_32(SseDeserializer deserializer);
+=======
+  String sse_decode_String(SseDeserializer deserializer);
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
+  Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -89,7 +111,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<WorkerDto> sse_decode_list_worker_dto(SseDeserializer deserializer);
 
   @protected
-  int sse_decode_u_32(SseDeserializer deserializer);
+  int sse_decode_u_8(SseDeserializer deserializer);
 
   @protected
   void sse_decode_unit(SseDeserializer deserializer);
@@ -98,6 +120,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt sse_decode_usize(SseDeserializer deserializer);
 
   @protected
+<<<<<<< HEAD
   WorkerDto sse_decode_worker_dto(SseDeserializer deserializer);
 
   @protected
@@ -119,6 +142,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_f_32(double self, SseSerializer serializer);
+=======
+  bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  void sse_encode_String(String self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_prim_u_8_strict(
+    Uint8List self,
+    SseSerializer serializer,
+  );
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -137,7 +178,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_u_32(int self, SseSerializer serializer);
+  void sse_encode_u_8(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
@@ -146,9 +187,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_usize(BigInt self, SseSerializer serializer);
 
   @protected
+<<<<<<< HEAD
   void sse_encode_worker_dto(WorkerDto self, SseSerializer serializer);
 
   @protected
+=======
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
   void sse_encode_bool(bool self, SseSerializer serializer);
 }
 

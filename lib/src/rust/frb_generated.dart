@@ -64,7 +64,11 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
+<<<<<<< HEAD
   int get rustContentHash => -1046014313;
+=======
+  int get rustContentHash => 1954389740;
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -76,10 +80,16 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
+<<<<<<< HEAD
   Future<List<TileDto>> crateApiGenerateInitialMap({
     required int width,
     required int height,
   });
+=======
+  Future<WorkerDto> crateApiCreateWorkerSample();
+
+  Future<WorkerDto> crateApiGetInitialWorker();
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   Future<List<WorkerDto>> crateApiUpdateGameState({
     required double deltaTime,
@@ -102,16 +112,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
+<<<<<<< HEAD
   Future<List<TileDto>> crateApiGenerateInitialMap({
     required int width,
     required int height,
   }) {
+=======
+  Future<WorkerDto> crateApiCreateWorkerSample() {
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
+<<<<<<< HEAD
           sse_encode_i_32(width, serializer);
           sse_encode_i_32(height, serializer);
+=======
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -120,21 +137,61 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
+<<<<<<< HEAD
           decodeSuccessData:
               sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTileDto,
           decodeErrorData: null,
         ),
         constMeta: kCrateApiGenerateInitialMapConstMeta,
         argValues: [width, height],
+=======
+          decodeSuccessData: sse_decode_worker_dto,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiCreateWorkerSampleConstMeta,
+        argValues: [],
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
         apiImpl: this,
       ),
     );
   }
 
+<<<<<<< HEAD
   TaskConstMeta get kCrateApiGenerateInitialMapConstMeta => const TaskConstMeta(
     debugName: "generate_initial_map",
     argNames: ["width", "height"],
   );
+=======
+  TaskConstMeta get kCrateApiCreateWorkerSampleConstMeta =>
+      const TaskConstMeta(debugName: "create_worker_sample", argNames: []);
+
+  @override
+  Future<WorkerDto> crateApiGetInitialWorker() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 2,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_worker_dto,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiGetInitialWorkerConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiGetInitialWorkerConstMeta =>
+      const TaskConstMeta(debugName: "get_initial_worker", argNames: []);
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
 
   @override
   Future<List<WorkerDto>> crateApiUpdateGameState({
@@ -145,12 +202,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_f_32(deltaTime, serializer);
+          sse_encode_f_64(deltaTime, serializer);
           sse_encode_list_worker_dto(currentWorkers, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
+<<<<<<< HEAD
             funcId: 2,
+=======
+            funcId: 3,
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
             port: port_,
           );
         },
@@ -197,7 +258,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  double dco_decode_f_32(dynamic raw) {
+  String dco_decode_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as String;
+  }
+
+  @protected
+  double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
   }
@@ -209,6 +276,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+<<<<<<< HEAD
   List<TileDto>
   dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTileDto(
     dynamic raw,
@@ -219,6 +287,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTileDto,
         )
         .toList();
+=======
+  Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as Uint8List;
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
   }
 
   @protected
@@ -228,7 +301,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int dco_decode_u_32(dynamic raw) {
+  int dco_decode_u_8(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
   }
@@ -249,6 +322,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   WorkerDto dco_decode_worker_dto(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
+<<<<<<< HEAD
     if (arr.length != 5)
       throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return WorkerDto(
@@ -281,13 +355,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return TileDtoImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
+=======
+    if (arr.length != 7)
+      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    return WorkerDto(
+      id: dco_decode_i_32(arr[0]),
+      name: dco_decode_String(arr[1]),
+      tileTypeId: dco_decode_i_32(arr[2]),
+      resourceAmount: dco_decode_i_32(arr[3]),
+      x: dco_decode_f_64(arr[4]),
+      y: dco_decode_f_64(arr[5]),
+      colorHex: dco_decode_String(arr[6]),
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     );
   }
 
   @protected
-  double sse_decode_f_32(SseDeserializer deserializer) {
+  String sse_decode_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getFloat32();
+    var inner = sse_decode_list_prim_u_8_strict(deserializer);
+    return utf8.decoder.convert(inner);
+  }
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat64();
+  }
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt32();
+  }
+
+  @protected
+  Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getUint8List(len_);
   }
 
   @protected
@@ -328,9 +434,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int sse_decode_u_32(SseDeserializer deserializer) {
+  int sse_decode_u_8(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint32();
+    return deserializer.buffer.getUint8();
   }
 
   @protected
@@ -347,6 +453,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   WorkerDto sse_decode_worker_dto(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+<<<<<<< HEAD
     var var_x = sse_decode_f_32(deserializer);
     var var_y = sse_decode_f_32(deserializer);
     var var_colorHex = sse_decode_u_32(deserializer);
@@ -358,6 +465,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       colorHex: var_colorHex,
       tileTypeId: var_tileTypeId,
       resourceAmount: var_resourceAmount,
+=======
+    var var_id = sse_decode_i_32(deserializer);
+    var var_name = sse_decode_String(deserializer);
+    var var_tileTypeId = sse_decode_i_32(deserializer);
+    var var_resourceAmount = sse_decode_i_32(deserializer);
+    var var_x = sse_decode_f_64(deserializer);
+    var var_y = sse_decode_f_64(deserializer);
+    var var_colorHex = sse_decode_String(deserializer);
+    return WorkerDto(
+      id: var_id,
+      name: var_name,
+      tileTypeId: var_tileTypeId,
+      resourceAmount: var_resourceAmount,
+      x: var_x,
+      y: var_y,
+      colorHex: var_colorHex,
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     );
   }
 
@@ -368,6 +492,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+<<<<<<< HEAD
   void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTileDto(
     TileDto self,
@@ -395,8 +520,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void sse_encode_f_32(double self, SseSerializer serializer) {
+=======
+  void sse_encode_String(String self, SseSerializer serializer) {
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putFloat32(self);
+    sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
+  }
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat64(self);
+  }
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt32(self);
+  }
+
+  @protected
+  void sse_encode_list_prim_u_8_strict(
+    Uint8List self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putUint8List(self);
   }
 
   @protected
@@ -434,9 +584,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_u_32(int self, SseSerializer serializer) {
+  void sse_encode_u_8(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint32(self);
+    serializer.buffer.putUint8(self);
   }
 
   @protected
@@ -453,11 +603,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_worker_dto(WorkerDto self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+<<<<<<< HEAD
     sse_encode_f_32(self.x, serializer);
     sse_encode_f_32(self.y, serializer);
     sse_encode_u_32(self.colorHex, serializer);
     sse_encode_i_32(self.tileTypeId, serializer);
     sse_encode_u_32(self.resourceAmount, serializer);
+=======
+    sse_encode_i_32(self.id, serializer);
+    sse_encode_String(self.name, serializer);
+    sse_encode_i_32(self.tileTypeId, serializer);
+    sse_encode_i_32(self.resourceAmount, serializer);
+    sse_encode_f_64(self.x, serializer);
+    sse_encode_f_64(self.y, serializer);
+    sse_encode_String(self.colorHex, serializer);
+>>>>>>> dacc739 (feat(bridge): connect flutter game loop with rust simulation core)
   }
 
   @protected
