@@ -11,7 +11,8 @@ Sebuah game simulasi manajemen koloni dan pertahanan minimalis 2D yang dibangun 
 - **Frontend:** Flutter & Flame Engine (2D Game Loop)
 - **Logic Engine:** Rust
 - **Bridge:** `flutter_rust_bridge` (FRB v2)
-
+## status Software 
+- **Masih dalam tahap Pembangunan**
 ## 📦 Cara Menjalankan (Development)
 *(Akan diperbarui setelah konfigurasi bridge selesai)*
 
